@@ -1,19 +1,35 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import MainBody from './MainBody'
-import Header from './Header'
+import { Routes, Route, Outlet } from "react-router";
+import AddNotes from './NewPage/AddNotes'
+import Header from './MainSite/Header'
+import Footer from './MainSite/Footer'
+import MainPage from './NewPage/MainPage';
+import ListNotes from './NewPage/ListNotes';
+import AddCourses from './NewPage/AddCourses';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <Header />
-      <MainBody />
+      <Routes>
+        <Route path="/" element={<Layout />} />
+          <Route index element={<MainPage />} />
+          <Route path="/addnotes" element={<AddNotes />} />
+          <Route path="/addcourses" element={<AddCourses />} />
+          <Route path="/listnotes" element={<ListNotes />} />
+      </Routes>
+      <Footer />
     </>
   )
+}
+
+function Layout() {
+  return (
+    <main className="flex-grow container mx-auto p-4">
+      <Outlet />
+    </main>
+  );
 }
 
 export default App

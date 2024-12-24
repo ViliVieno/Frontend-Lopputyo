@@ -1,2 +1,32 @@
 Made MainBody.jsx and Header.jsx using Copilot.
 Made AddNotes.jsx mostly with the course materials, but made improvements with ChatGPT
+More AI on AddNotes.jsx:
+
+const handleChange = (event) => {
+        selectedNote(event.target.value);
+};
+This is simple, when change happens then it grabs the selectedNotes value
+
+{currentNote && ( 
+The && makes this a "Conditional Rendering", where the condition is that the currentNotes value must be something other then "".
+This makes it so it doesnt display anything when there is no value.
+
+{selectedCourseId && (
+                <div style={{ marginTop: "20px" }}>
+                    <h3>Existing Notes for Selected Course:</h3>
+                    {notes
+                        .filter((note) => note.courseId === selectedCourseId)
+                        .map((note, index) => (
+                            <p key={index}>{note.note}</p>
+                        ))}
+                </div>
+I somehow could not find a way to get it to show the existing notes that were created, so this is what I got out of chatGPT...
+What I understand of it, it first filters the notes with the .filter with the courseid where the note.courseId has to be exactly the same as selectedCourseId. So with this it can tell which course its looking at and what notes have been added to it.
+
+NoteStore.jsx 
+addNote: (courseId, note) => {
+        set((state) => ({
+            notes: [...state.notes, { courseId, note }],
+        }));
+    },
+I was wondering why nothing was working before, then I asked chatgpt and it changed this small part and BOOM it works.

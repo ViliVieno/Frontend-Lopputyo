@@ -1,9 +1,10 @@
-import { create } from "zustand";
+import { create, useStore } from "zustand";
 
 const noteStore = create((set) => ({
     notes: [],
+    newNotes: "",
+    courses: [],
     hasFetched: false,
-    addNote: (ps) => set((state) => ({ notes: ps })),
     fetchNote: async () => {
         if (!noteStore.getState().hasFetched) {
             try {
@@ -11,12 +12,20 @@ const noteStore = create((set) => ({
                     "https://luentomuistiinpano-api.netlify.app/.netlify/functions/courses"
                 );
                 const result = await response.json();
-                set({ notes: result, hasFetched: true});
+                set({ courses: result, hasFetched: true});
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
         }
-    }
-}))
+    },
+
+    addNote: (courseId, note) => {
+        set((state) => ({
+            notes: [...state.notes, { courseId, note }],
+        }));
+    },
+
+    setNewNote: (note) => set({ newNote: note}),
+}));
 
 export default noteStore;

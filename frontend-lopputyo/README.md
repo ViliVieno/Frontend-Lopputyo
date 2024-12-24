@@ -1,1 +1,2 @@
-22.11. Made MainBody.jsx and Header.jsx using Copilot.
+Made MainBody.jsx and Header.jsx using Copilot.
+Made AddNotes.jsx mostly with the course materials, but made improvements with ChatGPT

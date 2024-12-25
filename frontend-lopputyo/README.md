@@ -30,3 +30,23 @@ addNote: (courseId, note) => {
         }));
     },
 I was wondering why nothing was working before, then I asked chatgpt and it changed this small part and BOOM it works.
+
+{/* Display notes for the selected course */}
+            {selectedCourseId && (
+                <div style={{ marginTop: "20px" }}>
+                    <h3>Notes for Selected Course:</h3>
+                    {notes
+                        .filter((note) => note.courseId === selectedCourseId) // Filter notes
+                        .map((note, index) => (
+                            <p key={index}>{note.note}</p> // Render each note
+                        ))}
+                    
+                    {/* Show fallback if no notes exist */}
+                    {notes.filter((note) => note.courseId === selectedCourseId).length === 0 && (
+                        <p>No notes available for this course.</p>
+                    )}
+                </div>
+            )}  
+This looks like a big part, but in reality its pretty much what I have been doing this whole time, but this time I tried to 
+make a useless separate function, when I could have just written the same thing in the ListNotes. ChatGPT was used to make
+it work.

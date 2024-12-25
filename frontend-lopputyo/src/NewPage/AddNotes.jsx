@@ -58,7 +58,6 @@ function AddNotes() {
                 </div>
             )}
 
-                {/* Optionally, you could display the notes associated with the selected course */}
                 {selectedCourseId && (
                 <div style={{ marginTop: "20px" }}>
                     <h3>Existing Notes for Selected Course:</h3>

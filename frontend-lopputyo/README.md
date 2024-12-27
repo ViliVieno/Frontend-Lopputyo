@@ -61,3 +61,26 @@ addCourse: (name) =>
             return { courses: [...state.courses, newCourse] };
         }),
 I made something that didnt work, then I asked ChatGPT to make it better. Then it simplified my code.
+
+{/* Display notes for the selected course */}
+            {selectedCourseId && (
+                <div style={{ marginTop: "20px" }}>
+                    <h3>Notes for Selected Course:</h3>
+                    {notes
+                        .filter((note) => note.course.id === parseInt(selectedCourseId)) // Filter notes by courseId
+                        .map((note) => (
+                            <div key={note.id}>
+                                <p>{note.text}</p> {/* Display the note text */}
+                                <small>{note.timestamp}</small> {/* Display timestamp */}
+                            </div>
+                        ))}
+
+                    {/* Show fallback if no notes exist */}
+                    {notes.filter((note) => note.course.id === parseInt(selectedCourseId)).length === 0 && (
+                        <p>No notes available for this course.</p>
+                    )}
+                </div>
+            )} 
+So this is what I have been trying to do for the last many hours and finally, with help from ChatGPT yet again, I did it.
+So the big thing that happens here is that it filters the courses to ID, and then finds the same ID from the json(netlify)
+where it can then write down the notes from there. it writes everything, the date, the note etc. 

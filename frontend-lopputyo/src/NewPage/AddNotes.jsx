@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import NoteStore from "../noteStore/NoteStore"; 
-import { Link } from 'react-router';
 
 function AddNotes() {
 
-    const { courses, notes, newNote, fetchNote, addNote, setNewNote } = NoteStore();
+    const { courses, notes, newNote, fetchCourse, fetchNote, addNote, setNewNote } = NoteStore();
     const [selectedCourseId, setSelectedCourseId] = useState("");
 
     useEffect(() => {
+        fetchCourse();
         fetchNote();
     }, []); 
 
@@ -33,6 +33,9 @@ function AddNotes() {
 
     return (
         <div>
+            <div class="py-8">
+                <h1 class="text-4xl font-bold">Make new notes for classes</h1>
+            </div>
             <h1>Select a Course and add a note for it</h1>
 
             {/* Dropdown Menu */}

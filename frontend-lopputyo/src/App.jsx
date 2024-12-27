@@ -15,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />} />
           <Route index element={<MainPage />} />
+          <Route path="/mainpage" element={<MainPage />} />
           <Route path="/addnotes" element={<AddNotes />} />
           <Route path="/addcourses" element={<AddCourses />} />
           <Route path="/listnotes" element={<ListNotes />} />
@@ -26,7 +27,7 @@ function App() {
 
 function Layout() {
   return (
-    <main className="flex-grow container mx-auto p-4">
+    <main className="flex-grow container mx-auto p-4 pt-24">
       <Outlet />
     </main>
   );

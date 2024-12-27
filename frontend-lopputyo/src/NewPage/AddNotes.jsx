@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import NoteStore from "../noteStore/NoteStore";
+import NoteStore from "../noteStore/NoteStore"; 
+import { Link } from 'react-router';
 
 function AddNotes() {
 
@@ -54,15 +55,18 @@ function AddNotes() {
                         rows="4"
                         cols="50"   
                     />
-                    <button onClick={handleSubmit}>Add Note</button>
+                    <button onClick={handleSubmit}
+                    className="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition"
+                    >Add Note</button>
                 </div>
             )}
 
                 {selectedCourseId && (
                 <div style={{ marginTop: "20px" }}>
-                    <h3>Existing Notes for Selected Course:</h3>
+                    <h3>Latest note:</h3>
                     {notes
                         .filter((note) => note.courseId === selectedCourseId)
+                        .slice(-1)
                         .map((note, index) => (
                             <p key={index}>{note.note}</p>
                         ))}

@@ -50,3 +50,14 @@ I was wondering why nothing was working before, then I asked chatgpt and it chan
 This looks like a big part, but in reality its pretty much what I have been doing this whole time, but this time I tried to 
 make a useless separate function, when I could have just written the same thing in the ListNotes. ChatGPT was used to make
 it work.
+
+NoteStore.jsx
+addCourse: (name) =>
+        set((state) => {
+            const newCourse = {
+                id: String(state.courses.length + 1),
+                name,
+            };
+            return { courses: [...state.courses, newCourse] };
+        }),
+I made something that didnt work, then I asked ChatGPT to make it better. Then it simplified my code.

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import NoteStore from "../noteStore/NoteStore";
+import { Link } from "react-router";
 
 function ListNotes() {
 

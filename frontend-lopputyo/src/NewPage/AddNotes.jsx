@@ -66,12 +66,12 @@ function AddNotes() {
 
                 {selectedCourseId && (
                 <div style={{ marginTop: "20px" }}>
-                    <h3>Latest note:</h3>
+                    <h3>Latest note for this class:</h3>
                     {notes
-                        .filter((note) => note.courseId === selectedCourseId)
+                        .filter((note) => note.course.id === parseInt(selectedCourseId))
                         .slice(-1)
                         .map((note, index) => (
-                            <p key={index}>{note.note}</p>
+                            <p key={index}>{note.text}</p>
                         ))}
                 </div>
             )}

@@ -1,3 +1,5 @@
+AI Part.
+--------------------------------------------------------------------------------------------------------------
 Made MainBody.jsx and Header.jsx using Copilot.
 Made AddNotes.jsx mostly with the course materials, but made improvements with ChatGPT
 More AI on AddNotes.jsx:
@@ -84,3 +86,16 @@ I made something that didnt work, then I asked ChatGPT to make it better. Then i
 So this is what I have been trying to do for the last many hours and finally, with help from ChatGPT yet again, I did it.
 So the big thing that happens here is that it filters the courses to ID, and then finds the same ID from the json(netlify)
 where it can then write down the notes from there. it writes everything, the date, the note etc. 
+
+After it broke the whole thing, I needed to add
+const course = state.courses.find(course => course.id === parseInt(courseId));
+to my addNote in the NoteStore while reworking the whole addNote to work with the newly added fetchNote.
+This was, of course, ChatGPT who told me this. 
+The same for the addCourse
+id: state.courses.length ? state.courses[state.courses.length - 1].id + 1 : 1,  // Use the last course's id + 1 for new courses
+This is the only time I am using code that I do not fully understand, but as it works it works.
+
+Did some work on how the app looks with ChatGPT.
+
+Last thing, in the ListNotes I made a "Show all" in the dropdown menu. This was made with help from ChatGPT. 
+---------------------------------------------------------------------------------------------------------

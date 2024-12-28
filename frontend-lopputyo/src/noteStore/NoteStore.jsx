@@ -34,16 +34,23 @@ const noteStore = create((set) => ({
         }
     },
 
-    addNote: (courseId, note) => {
-        set((state) => ({
-            notes: [...state.notes, { courseId, note }],
-        }));
-    },
+    addNote: (courseId, noteText) => set((state) => {
+        const course = state.courses.find(course => course.id === parseInt(courseId)); // Find the course based on the selected courseId
+
+        const newNote = {
+            id: state.notes.length + 1,
+            text: noteText,
+            timestamp: new Date().toISOString(),
+            course: course,
+        };
+
+        return { notes: [...state.notes, newNote] }; 
+}),
 
     addCourse: (name) =>
         set((state) => {
             const newCourse = {
-                id: String(state.courses.length + 1),
+                id: state.courses.length ? state.courses[state.courses.length - 1].id + 1 : 1,  // Use the last course's id + 1 for new courses
                 name,
             };
             return { courses: [...state.courses, newCourse] };

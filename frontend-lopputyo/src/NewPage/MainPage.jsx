@@ -4,6 +4,9 @@ import { Link } from 'react-router';
 const MainPage = () => {
     return (
         <main className="container mx-auto p-4">
+            <div class="py-8">
+                <h1 class="text-6xl font-bold">NotesApp</h1>
+            </div>
             <section className= "text-white p-6">  
                 <nav className="flex space-x-6">
                     <div className="flex space-x-4">

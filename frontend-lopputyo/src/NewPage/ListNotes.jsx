@@ -1,55 +1,61 @@
-    import { useEffect, useState } from "react";
-    import NoteStore from "../noteStore/NoteStore";
+import { useEffect, useState } from "react";
+import NoteStore from "../noteStore/NoteStore";
 
-    function ListNotes() {
+function ListNotes() {
+    const { courses, notes, fetchNote, fetchCourse, setNewNote } = NoteStore();
+    const [selectedCourseId, setSelectedCourseId] = useState("");
+    const [showAll, setShowAll] = useState(false);
 
-        const { courses, notes, fetchNote, fetchCourse, setNewNote } = NoteStore();
-        const [selectedCourseId, setSelectedCourseId] = useState("");
-        
-        useEffect(() => {
-            fetchCourse();
-            fetchNote();    
-        }, []); 
-        
-        const handleCourseChange = (e) => {
-            setSelectedCourseId(e.target.value); 
-        };
+    useEffect(() => {
+        fetchCourse();
+        fetchNote();
+    }, []);
+    
+    const handleCourseChange = (e) => {
+        const value = e.target.value;
+        setSelectedCourseId(value);
+        setShowAll(value === "all"); 
+    };
 
-        return (
-            <div>
-                <div class="py-8">
-                    <h1 class="text-4xl font-bold">List of notes</h1>
-                </div>
-                <select value={selectedCourseId} onChange={handleCourseChange}>
-                    <option value=""></option>
-                    {courses.map((course) => (
-                        <option key={course.id} value={course.id}>
-                            {course.name}
-                        </option>
-                    ))}
-                </select>  
+    const filteredNotes = notes.filter((note) => {
+        if (showAll) {
+            return true; 
+        }
+        return note.course.id === parseInt(selectedCourseId);
+    });
 
-                {/* Display notes for the selected course */}
-            {selectedCourseId && (
-                <div style={{ marginTop: "20px" }}>
-                    <h3>Notes for Selected Course:</h3>
-                    {notes
-                        .filter((note) => note.course.id === parseInt(selectedCourseId)) // Filter notes by courseId
-                        .map((note) => (
-                            <div key={note.id}>
-                                <p>{note.text}</p> {/* Display the note text */}
-                                <small>{note.timestamp}</small> {/* Display timestamp */}
-                            </div>
-                        ))}
-
-                    {/* Show fallback if no notes exist */}
-                    {notes.filter((note) => note.course.id === parseInt(selectedCourseId)).length === 0 && (
-                        <p>No notes available for this course.</p>
-                    )}
-                </div>
-            )} 
+    return (
+        <div>
+            <div className="py-8">
+                <h1 className="text-4xl font-bold">List of notes</h1>
             </div>
-        );
-    }
+            <select value={selectedCourseId} onChange={handleCourseChange}>
+                <option value="">Select a Course</option>
+                <option value="all">Show All Notes</option>
+                {courses.map((course) => (
+                    <option key={course.id} value={course.id}>
+                        {course.name}
+                    </option>
+                ))}
+            </select>
 
-    export default ListNotes;
+            <div style={{ marginTop: "20px" }}>
+                <h3>{showAll ? "All Notes" : "Notes for Selected Course:"}</h3>
+
+                {filteredNotes.length > 0 ? (
+                    filteredNotes.map((note) => (
+                        <div key={note.id} style={{ marginBottom: "20px" }}>
+                            <h4 className="font-semibold">{note.course.name}</h4>
+                            <p>{note.text}</p>
+                            <small>{note.timestamp}</small>
+                        </div>
+                    ))
+                ) : (
+                    <p>No notes available for this course.</p>
+                )}
+            </div>
+        </div>
+    );
+}
+
+export default ListNotes;

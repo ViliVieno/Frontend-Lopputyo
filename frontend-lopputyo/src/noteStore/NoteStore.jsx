@@ -7,7 +7,7 @@ const noteStore = create((set) => ({
     hasFetched: false,
     hasFetchedNote: false,
     fetchCourse: async () => {
-        if (!noteStore.getState().hasFetched) {
+        if (!noteStore.getState().hasFetched) { // This is mostly a replica of the one made in class.
             try {
                 const response = await fetch(
                     "https://luentomuistiinpano-api.netlify.app/.netlify/functions/courses"
@@ -38,9 +38,9 @@ const noteStore = create((set) => ({
         const course = state.courses.find(course => course.id === parseInt(courseId)); // Find the course based on the selected courseId
 
         const newNote = {
-            id: state.notes.length + 1,
+            id: state.notes.length + 1, 
             text: noteText,
-            timestamp: new Date().toISOString(),
+            timestamp: new Date().toISOString(), // There must be a better way to display time, but this works so I left it here.
             course: course,
         };
 
@@ -49,7 +49,7 @@ const noteStore = create((set) => ({
 
     addCourse: (name) =>
         set((state) => {
-            const newCourse = {
+            const newCourse = { 
                 id: state.courses.length ? state.courses[state.courses.length - 1].id + 1 : 1,  // Use the last course's id + 1 for new courses
                 name,
             };

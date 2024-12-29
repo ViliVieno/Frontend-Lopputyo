@@ -16,7 +16,7 @@ const MainPage = () => {
                         <Link to="/ListNotes">
                           <button className="bg-gray-100 text-black px-4 py-2 rounded hover:bg-gray-200">List notes</button>
                         </Link>
-                        <Link to="AddCourses">
+                        <Link to="/AddCourses">
                           <button className="bg-gray-100 text-black px-4 py-2 rounded hover:bg-gray-200 text-center;">Add courses</button>
                         </Link>
                     </div>

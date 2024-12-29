@@ -5,6 +5,7 @@ function AddNotes() {
 
     const { courses, notes, newNote, fetchCourse, fetchNote, addNote, setNewNote } = NoteStore();
     const [selectedCourseId, setSelectedCourseId] = useState("");
+    const [courseIdAdded, setCourseIdAdded] = useState("");
 
     useEffect(() => {
         fetchCourse();
@@ -28,6 +29,7 @@ function AddNotes() {
         }
         
         addNote(selectedCourseId, newNote);
+        setCourseIdAdded(`Note for course "${selectedCourseId}" added succesfully!`);
         setNewNote("");
     }
 
@@ -38,7 +40,6 @@ function AddNotes() {
             </div>
             <h1>Select a Course and add a note for it</h1>
 
-            {/* Dropdown Menu */}
             <select value={selectedCourseId} onChange={handleCourseChange}>
                 <option value=""></option>
                 {courses.map((course) => (
@@ -62,6 +63,10 @@ function AddNotes() {
                     className="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition"
                     >Add Note</button>
                 </div>
+            )}
+
+            {courseIdAdded && (
+                <p>{courseIdAdded}</p>
             )}
 
                 {selectedCourseId && (

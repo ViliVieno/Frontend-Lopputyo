@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NoteStore from "../noteStore/NoteStore";
 
 function AddCourses() {
     
-    const { addCourse } = NoteStore();
+    const { addCourse, fetchCourse, fetchNote } = NoteStore();
     const [NewCourse, SetNewCourse] = useState("");
+    const [courseAdded, setCourseAdded] = useState("");
+    
+    useEffect(() => {
+        fetchCourse();
+        fetchNote();
+    }, []); 
 
     const handleAddCourse = () => {
         if (!NewCourse.trim()) {
@@ -12,6 +18,7 @@ function AddCourses() {
             return;
         }
         addCourse(NewCourse);
+        setCourseAdded(`Course "${NewCourse}" added successfully!`);
         SetNewCourse("");
     };
 
@@ -24,9 +31,15 @@ function AddCourses() {
                 type="text"
                 value={NewCourse}
                 onChange={(e) => SetNewCourse(e.target.value)}
-                placeholder="Enter a name"
+                placeholder="Enter a new course"
             />  
-            <button onClick={handleAddCourse}>Add Course</button>
+            <button onClick={handleAddCourse}
+            className="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition"
+            >Add Course</button>
+
+            {courseAdded && (
+                <p>{courseAdded}</p>
+            )}
         </div>
     );
 }

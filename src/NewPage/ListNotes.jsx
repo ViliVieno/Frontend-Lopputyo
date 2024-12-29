@@ -4,7 +4,7 @@ import NoteStore from "../noteStore/NoteStore";
 function ListNotes() {
     const { courses, notes, fetchNote, fetchCourse, setNewNote } = NoteStore();
     const [selectedCourseId, setSelectedCourseId] = useState("");
-    const [showAll, setShowAll] = useState(false);
+    const [showAll, setShowAll] = useState(false); // By default it doesnt show everything
 
     useEffect(() => {
         fetchCourse();
@@ -17,9 +17,9 @@ function ListNotes() {
         setShowAll(value === "all"); 
     };
 
-    const filteredNotes = notes.filter((note) => {
+    const filteredNotes = notes.filter((note) => { // The filter for what is selected.
         if (showAll) {
-            return true; 
+            return true;  // If showall is selected, then it shows every note
         }
         return note.course.id === parseInt(selectedCourseId);
     });
@@ -39,10 +39,10 @@ function ListNotes() {
                 ))}
             </select>
 
-            <div style={{ marginTop: "20px" }}>
-                <h3>{showAll ? "All Notes" : "Notes for Selected Course:"}</h3>
+            <div style={{ marginTop: "20px" }}> 
+                <h3>{showAll ? "All Notes" : "Notes for Selected Course:"}</h3> 
 
-                {filteredNotes.length > 0 ? (
+                {filteredNotes.length > 0 ? ( // Shows all when show all is selected if there are more than 0
                     filteredNotes.map((note) => (
                         <div key={note.id} style={{ marginBottom: "20px" }}>
                             <h4 className="font-semibold">{note.course.name}</h4>

@@ -49,7 +49,7 @@ function AddNotes() {
                 ))}
             </select>
 
-            {selectedCourseId && (
+            {selectedCourseId && ( // This is conditional rendering. It doesnt show anything if it doesnt have a value.
                 <div style={{ marginTop: "20px" }}>
                     <h2>Add a new note:</h2>
                     <textarea
@@ -71,10 +71,10 @@ function AddNotes() {
 
                 {selectedCourseId && (
                 <div style={{ marginTop: "20px" }}>
-                    <h3>Latest note for this class:</h3>
+                    <h3>Latest note for this class:</h3> 
                     {notes
-                        .filter((note) => note.course.id === parseInt(selectedCourseId))
-                        .slice(-1)
+                        .filter((note) => note.course.id === parseInt(selectedCourseId)) 
+                        .slice(-1) // This part, first it filters the notes by course id and then it slices, so only the last note is left.
                         .map((note, index) => (
                             <p key={index}>{note.text}</p>
                         ))}
